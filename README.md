@@ -1,5 +1,6 @@
 # hangman
 Hangman Game vs Computer (AI)
+
 version: 0.9.1 (beta)
 
 Rules:
