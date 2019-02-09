@@ -14,10 +14,12 @@ def hangman(L):
         if wrongAnswers != 0:
             print('You have given ', wrongAnswers, ' wrong answers so far.')
         doubleChar = True
-        while doubleChar:
+        notChar = True
+        while doubleChar or notChar:
             char = input('Guess a character: ')
-            if len(char) == 1:
+            if len(char) == 1 and char.isalpha():
                 doubleChar = False
+                notChar = False
             else:
                 print('Only one character. If you have found the word, keep writing one character at a time.')
         char = char.lower()
@@ -29,7 +31,8 @@ def hangman(L):
                 visualAid.pop(i)
                 visualAid.insert(i,word[i])
             elif char == visualAid[i]:
-                print('You have again the character ' + char + '.')
+                print('You have chosen again the character ' + char + '.')
+                break
         if not guess:
             wrongAnswers +=1
             print('Wrong guess.')
@@ -104,10 +107,11 @@ while again:
     while wrong:
         print('Do you want to play an other game? ')
         play = input('Answer with a Yes [y] or No [n]: ')
-        if play.lower() == 'y' or play.lower() == 'yes':
+        play = play.lower()
+        if play == 'y' or play == 'yes':
             again = True
             wrong = False
-        elif play.lower() == 'n' or play.lower() == 'no':
+        elif play == 'n' or play == 'no':
             again = False
             wrong = False
             print('\n')
