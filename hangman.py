@@ -1,9 +1,8 @@
-from random import choice
+from random import randint
 
-def hangman(L):
+def hangman(word):
     wrongAnswers = 0
     correctAnswers = 1
-    word = choice(L)
     visualAid = []
     visualAid.append(word[0])
     
@@ -51,9 +50,10 @@ print('****************************   version: 0.9.1   *************************
 print('*****************************************************************************')
 print('********************  Developed by Nikos Amartolos **************************')
 print('*****************************************************************************\n')
-print('You have 6 attempts to find the word. Let\'s start the game!\n')
 
+wrongInput = True
 again = True
+
 L = ['abandon', 'ability', 'able', 'abortion', 'about', 'above', 'abroad', 'absence', 'absolute', 'absolutely', 'absorb', 'abuse', 'academic', 'accept', 'access',
 'accident', 'accompany', 'accomplish', 'according', 'account', 'accurate', 'accuse', 'achieve', 'achievement', 'acid', 'acknowledge', 'acquire', 'across', 'action',
 'active', 'activist', 'activity', 'actor', 'actress', 'actual', 'actually', 'adapt', 'addition', 'additional', 'address', 'adequate',
@@ -227,9 +227,31 @@ L = ['abandon', 'ability', 'able', 'abortion', 'about', 'above', 'abroad', 'abse
 'nidificate', 'osculator', 'parsimonious', 'penultimate', 'perfidiousness', 'perspicacious', 'proficuous', 'remunerative', 'saxicolous', 'sesquipedalian', 'superabundant',
 'unencumbered', 'unparagoned', 'usufruct', 'winebibber', 'zoology', 'zenith', 'yammer', 'wring']
 
+lengthList = len(L)
+
+print('You have 6 attempts to find the word.\n') 
+while wrongInput:
+    length = input('Firstly, choose the minimum length of the hidden word: ')   #     Let\'s start the game!\n')
+    if not length.isnumeric():
+        print('Invalid input')
+    else:
+        length = int(length)
+        if length <= 0:
+            print('Invalid word length')
+        else:
+            for i in range(lengthList):
+                if len(L[i]) < length:
+                    L.pop(i)
+            if len(L) == 0:
+                print('We don\'t know a word larger than', length, 'characters.')
+            else:
+                wrongInput = False    
+                 
 while again:
     wrong = True
-    hangman(L)
+    lengthList = len(L)
+    radomInt = randint(0, lengthList-1)
+    word = L.pop(radomInt)
     while wrong:
         print('Do you want to play an other game? ')
         play = input('Answer with a Yes [y] or No [n]: ')
