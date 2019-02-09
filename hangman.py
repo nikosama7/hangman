@@ -1,15 +1,19 @@
 from random import randint
 
-def hangman(word):
+def hangman(word, hidden):
     wrongAnswers = 0
     correctAnswers = 1
     visualAid = []
-    visualAid.append(word[0])
-    
+    if hidden:
+        visualAid.append('_')
+    else:
+        visualAid.append(word[0])
     for i in range(1,len(word)):
         visualAid.append('_')
-    print(visualAid)
     while wrongAnswers <= 6 and correctAnswers < len(word):
+        for i in range(len(word)):
+            print(visualAid[i], end=' ')
+        print('\n')
         if wrongAnswers != 0:
             print('You have given ', wrongAnswers, ' wrong answers so far.')
         doubleChar = True
@@ -23,6 +27,7 @@ def hangman(word):
                 print('Only one character. If you have found the word, keep writing one character at a time.')
         char = char.lower()
         guess = False
+        sameGuess = False
         for i in range(1, len(word)):
             if char == word[i] and char != visualAid[i]:
                 guess = True
@@ -31,22 +36,23 @@ def hangman(word):
                 visualAid.insert(i,word[i])
             elif char == visualAid[i]:
                 print('You have chosen again the character ' + char + '.')
+                sameGuess = True
                 break
-        if not guess:
+        if not guess and not sameGuess:
             wrongAnswers +=1
             print('Wrong guess.')
-        print(visualAid)
+
     if correctAnswers == len(word):
-        print('You won!')
+        print('You won!\n')
     else:
         print('You lost. Try another time.')
-        print('The hidden word was ' + word + ' .')
+        print('The hidden word was ' + word + ' .\n')
             
             
 print('*****************************************************************************')
 print('********************************   HANGMAN   ********************************')
 print('*****************************************************************************')
-print('****************************   version: 0.9.1   *****************************')
+print('****************************   version: 1.1.0   *****************************')
 print('*****************************************************************************')
 print('********************  Developed by Nikos Amartolos **************************')
 print('*****************************************************************************\n')
@@ -82,7 +88,7 @@ L = ['abandon', 'ability', 'able', 'abortion', 'about', 'above', 'abroad', 'abse
 'carrier', 'carry', 'case', 'cash', 'catch', 'category', 'cause', 'ceiling', 'celebrate', 'celebration', 'celebrity', 'cell', 'center',
 'central', 'century', 'ceremony', 'certain', 'certainly', 'chain', 'chair', 'chairman', 'challenge', 'chamber', 'champion', 'championship',
 'chance', 'change', 'changing', 'channel', 'chapter', 'character', 'characteristic', 'characterize', 'charge', 'charity', 'chart', 'chase',
-'cheap', 'check', 'cheek', 'cheese', 'chemical', 'chest','chicken', 'chief', 'children', 'childhood', 'chocolate', 'choice', 'cholesterol'
+'cheap', 'check', 'cheek', 'cheese', 'chemical', 'chest','chicken', 'chief', 'children', 'childhood', 'chocolate', 'choice', 'cholesterol',
 'choose', 'church', 'cigarette', 'circle', 'circumstance', 'citizen', 'civil', 'civilian', 'claim', 'class', 'classic', 'classroom', 'clearly',
 'client', 'climate', 'climb', 'clinic', 'clinical', 'closely', 'closer', 'clothes', 'clothing', 'cloud', 'cluster', 'coach', 'coalition', 'coast',
 'coat', 'code', 'coffee', 'cognitive', 'collapse', 'colleague', 'collect', 'collection', 'collective', 'college', 'colonial', 'color', 'column',
@@ -140,7 +146,7 @@ L = ['abandon', 'ability', 'able', 'abortion', 'about', 'above', 'abroad', 'abse
 'important', 'impose', 'impossible', 'impress', 'impression', 'impressive', 'improve', 'improvement', 'incentive', 'incident', 'include', 'including', 'income',
 'incorporate', 'increase', 'increased', 'increasing', 'increasingly', 'incredible', 'indeed', 'independence', 'independent', 'index', 'indicate', 'indication',
 'individual', 'industrial', 'industry', 'infant', 'infection', 'inflation', 'influence', 'inform', 'information', 'ingredient', 'initial', 'initially', 'initiative',
-'injury', 'inner', 'innocent', 'inquiry', 'inside', 'insight', 'insist', 'inspire', 'install', 'instance', 'instead', 'institution', 'institutional', 'instruction'
+'injury', 'inner', 'innocent', 'inquiry', 'inside', 'insight', 'insist', 'inspire', 'install', 'instance', 'instead', 'institution', 'institutional', 'instruction',
 'instructor', 'instrument', 'insurance', 'intellectual', 'intelligence', 'intend', 'intense', 'intensity', 'intention', 'interaction', 'interest', 'interested',
 'interesting', 'internal', 'international', 'Internet', 'interpret', 'interpretation', 'intervention', 'interview', 'introduce', 'introduction', 'invasion', 'invest',
 'investigate', 'investigation', 'investigator', 'investment', 'investor', 'invite', 'involve', 'involved', 'involvement', 'iron', 'island', 'issue', 'item', 'jacket',
@@ -175,7 +181,7 @@ L = ['abandon', 'ability', 'able', 'abortion', 'about', 'above', 'abroad', 'abse
 'preparation', 'prepare', 'prescription', 'presence', 'present', 'presentation', 'preserve', 'president', 'presidential', 'press', 'pressure', 'pretend', 'pretty',
 'prevent', 'previous', 'previously', 'price', 'pride', 'priest', 'primarily', 'primary', 'prime', 'principal', 'principle', 'print', 'prior', 'priority', 'prison',
 'prisoner', 'privacy', 'private', 'probably', 'problem', 'procedure', 'proceed', 'process', 'produce', 'producer', 'product', 'production', 'profession', 'professional',
-'professor', 'profile', 'profit', 'program', 'progress', 'project', 'prominent', 'promise', 'promote', 'prompt', 'proof', 'proper', 'properly', 'property', 'proportion'
+'professor', 'profile', 'profit', 'program', 'progress', 'project', 'prominent', 'promise', 'promote', 'prompt', 'proof', 'proper', 'properly', 'property', 'proportion',
 'proposal', 'propose', 'proposed', 'prosecutor', 'prospect', 'protect', 'protection', 'protein', 'protest', 'proud', 'prove', 'provide', 'provider', 'province',
 'provision', 'psychological', 'psychologist', 'psychology', 'public', 'publication', 'publicly', 'publish', 'publisher', 'punishment', 'purchase', 'pure', 'purpose',
 'pursue', 'qualify', 'quality', 'quarter', 'quarterback', 'question', 'quick', 'quickly', 'quiet', 'quietly', 'quite', 'quote', 'racial', 'radical', 'radio', 'rail',
@@ -228,7 +234,7 @@ L = ['abandon', 'ability', 'able', 'abortion', 'about', 'above', 'abroad', 'abse
 'unencumbered', 'unparagoned', 'usufruct', 'winebibber', 'zoology', 'zenith', 'yammer', 'wring']
 
 lengthList = len(L)
-
+exclude = []
 print('You have 6 attempts to find the word.\n') 
 while wrongInput:
     length = input('Firstly, choose the minimum length of the hidden word: ')   #     Let\'s start the game!\n')
@@ -240,20 +246,47 @@ while wrongInput:
             print('Invalid word length')
         else:
             for i in range(lengthList):
-                if len(L[i]) < length:
-                    L.pop(i)
-            if len(L) == 0:
-                print('We don\'t know a word larger than', length, 'characters.')
-            else:
-                wrongInput = False    
-                 
+                if len(L[i]) >= length:
+                    wrongInput = False
+                    break
+            if wrongInput:
+                print('We don\'t know a word larger than', length, 'characters.') 
+print('\n')
+print('Loading...', end='')
+                
+for i in range(lengthList):
+    if len(L[i]) < length:
+        exclude.append(L[i])
+print('.....', end='')
+if len(exclude) != 0:                
+    for i in range(len(exclude)):
+        L.remove(exclude[i])
+print('......\n')
+
+while True:
+    print('Do you want the first character of the hidden word to be hidden?')
+    firstLetter = input('Answer with a Yes [y] or No [n]: ')
+    firstLetter = firstLetter.lower()
+    if firstLetter == 'y' or firstLetter == 'yes':
+        hidden = True
+        break
+    elif firstLetter == 'n' or firstLetter == 'no':
+        hidden = False
+        break
+    else:
+        print('I\'ll ask you again.')
+
+print('\n')
+print('Let\'s start the game!\n')
+
 while again:
     wrong = True
     lengthList = len(L)
     radomInt = randint(0, lengthList-1)
     word = L.pop(radomInt)
+    hangman(word, hidden)
     while wrong:
-        print('Do you want to play an other game? ')
+        print('Do you want to play an other game?')
         play = input('Answer with a Yes [y] or No [n]: ')
         play = play.lower()
         if play == 'y' or play == 'yes':
@@ -262,11 +295,12 @@ while again:
         elif play == 'n' or play == 'no':
             again = False
             wrong = False
-            print('\n')
             print('We hope you will play again anothr time.\n')
             print('*****************************************************************************')
             print('********************************   HANGMAN   ********************************')
             print('*****************************************************************************')
         else:
             print('I\'ll ask you again.')
+
+
 
